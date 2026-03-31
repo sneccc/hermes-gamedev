@@ -42,8 +42,8 @@ watchdog:
   tier0IntervalMs: 30000
   tier1Enabled: false
   tier2Enabled: false
-  staleThresholdMs: 300000
-  zombieThresholdMs: 600000
+  staleThresholdMs: 7200000
+  zombieThresholdMs: 14400000
   nudgeIntervalMs: 60000
   rpcTimeoutMs: 5000
   triageTimeoutMs: 30000
