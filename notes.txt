@@ -1,2 +1,12 @@
 setup this project as a gh repo add a .claude/ dir and 
 a root claude file  then run  "bd init" "mulch init" and "overstory init"
+
+
+
+
+overstory hooks install
+
+
+overstory coordinator start --watchdog
+
+overstory dashboard --all
