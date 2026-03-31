@@ -5,6 +5,12 @@
   "status": "in-progress",
   "files": [
     "docs/gdd.md",
-    "docs/systems_plan.json"
+    "docs/systems_plan.json",
+    "src/main.py",
+    "src/constants.py",
+    "src/entities.py",
+    "src/systems.py",
+    "src/ui.py",
+    "src/utils.py"
   ]
 }
