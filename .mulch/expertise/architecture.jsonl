@@ -1,0 +1,1 @@
+{"classification":"tactical","recorded_at":"2026-03-31T01:15:52.442Z","tags":["merge-conflict"],"evidence":{"bead":"gamedev_project-e022"},"type":"pattern","name":"","description":"Merge conflict failed at tier ai-resolve. Branch: overstory/design-lead/gamedev_project-e022. Agent: design-lead. Conflicting files: .mulch/mulch.config.yaml.","id":"mx-ecd3cf"}
