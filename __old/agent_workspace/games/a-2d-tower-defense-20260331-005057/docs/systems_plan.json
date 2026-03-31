@@ -1,0 +1,212 @@
+{
+  "project": {
+    "title": "Neon Bastion",
+    "profile": "prototype",
+    "entrypoint": "src/main.py"
+  },
+  "module_contracts": [
+    {
+      "path": "src/main.py",
+      "purpose": "Entry point: Initializes pyray and manages the high-level state machine.",
+      "exports": [],
+      "depends_on": [
+        "src/engine.py",
+        "src/constants.py"
+      ]
+    },
+    {
+      "path": "src/engine.py",
+      "purpose": "Core game loop orchestration, state management, and system updates.",
+      "exports": [
+        {
+          "name": "GameEngine",
+          "kind": "class",
+          "methods": [
+            "update",
+            "draw",
+            "reset",
+            "handle_input"
+          ],
+          "signature": "GameEngine()",
+          "notes": "Maintains lists of active entities, current credits, and wave state."
+        }
+      ],
+      "depends_on": [
+        "src/entities.py",
+        "src/ui.py",
+        "src/utils.py",
+        "src/constants.py"
+      ]
+    },
+    {
+      "path": "src/entities.py",
+      "purpose": "Class definitions for game objects with specific behaviors.",
+      "exports": [
+        {
+          "name": "Core",
+          "kind": "class",
+          "methods": [
+            "take_damage",
+            "draw"
+          ],
+          "signature": "Core(position_vec2)",
+          "notes": "The player's base."
+        },
+        {
+          "name": "Enemy",
+          "kind": "class",
+          "methods": [
+            "update",
+            "draw",
+            "take_damage"
+          ],
+          "signature": "Enemy(path_points, enemy_type_str)",
+          "notes": "Follows path using linear interpolation."
+        },
+        {
+          "name": "Tower",
+          "kind": "class",
+          "methods": [
+            "update",
+            "draw",
+            "upgrade",
+            "try_fire"
+          ],
+          "signature": "Tower(position_vec2, tower_type_str)",
+          "notes": "Scans for targets and creates projectiles."
+        },
+        {
+          "name": "Projectile",
+          "kind": "class",
+          "methods": [
+            "update",
+            "draw"
+          ],
+          "signature": "Projectile(position_vec2, target_enemy, damage, speed)",
+          "notes": "Moves toward target and applies damage on collision."
+        }
+      ],
+      "depends_on": [
+        "src/utils.py",
+        "src/constants.py"
+      ]
+    },
+    {
+      "path": "src/ui.py",
+      "purpose": "HUD and menu rendering with interaction handling.",
+      "exports": [
+        {
+          "name": "Interface",
+          "kind": "class",
+          "methods": [
+            "draw_hud",
+            "draw_menu",
+            "draw_game_over",
+            "get_clicked_slot"
+          ],
+          "signature": "Interface()",
+          "notes": "Renders text, buttons, and tower selection overlays."
+        }
+      ],
+      "depends_on": [
+        "src/constants.py"
+      ]
+    },
+    {
+      "path": "src/utils.py",
+      "purpose": "Math helpers and visual feedback systems.",
+      "exports": [
+        {
+          "name": "ParticleSystem",
+          "kind": "class",
+          "methods": [
+            "emit",
+            "update",
+            "draw"
+          ],
+          "signature": "ParticleSystem()",
+          "notes": "Handles death bursts and fire effects."
+        },
+        {
+          "name": "get_distance",
+          "kind": "function",
+          "signature": "get_distance(vec2_a, vec2_b)",
+          "notes": "Returns float distance between two points."
+        },
+        {
+          "name": "lerp_vec2",
+          "kind": "function",
+          "signature": "lerp_vec2(vec2_a, vec2_b, t)",
+          "notes": "Linear interpolation for enemy pathing."
+        }
+      ],
+      "depends_on": []
+    },
+    {
+      "path": "src/constants.py",
+      "purpose": "Configuration and balance data.",
+      "exports": [
+        {
+          "name": "COLORS",
+          "kind": "variable",
+          "signature": "dict",
+          "notes": "Dictionary of pyray Color objects."
+        },
+        {
+          "name": "TOWER_DATA",
+          "kind": "variable",
+          "signature": "dict",
+          "notes": "Stats for Pulse and Beam towers."
+        },
+        {
+          "name": "ENEMY_DATA",
+          "kind": "variable",
+          "signature": "dict",
+          "notes": "Stats for Swarmer and Tank types."
+        }
+      ],
+      "depends_on": []
+    }
+  ],
+  "data_contracts": [
+    {
+      "path": "data/config.json",
+      "purpose": "External balance configuration.",
+      "keys": [
+        "tower_stats.pulse.cost",
+        "tower_stats.pulse.range",
+        "tower_stats.beam.cost",
+        "enemy_stats.swarmer.hp",
+        "enemy_stats.tank.speed",
+        "wave_data.initial_budget",
+        "colors.background",
+        "colors.path_neon"
+      ]
+    }
+  ],
+  "runtime_flow": [
+    "main.py initializes raylib window and global state.",
+    "engine.py loads configuration from constants.py and data/config.json.",
+    "engine.py spawns the Core and defines the path waypoints.",
+    "Input loop checks for tower placement clicks or wave start (Space).",
+    "Update loop moves enemies along path points using utils.lerp_vec2.",
+    "Towers perform distance checks against enemies and spawn Projectiles.",
+    "Projectiles check for collisions with enemies to apply damage.",
+    "UI renders current credits, health, and wave progress overlays.",
+    "On Core health <= 0, main.py switches state to GameOver."
+  ],
+  "implementation_order": [
+    "src/constants.py",
+    "src/utils.py",
+    "src/entities.py",
+    "src/ui.py",
+    "src/engine.py",
+    "src/main.py"
+  ],
+  "risk_checks": [
+    "Ensure Projectile target references are cleared if the Enemy is destroyed to avoid null pointer errors.",
+    "Verify that screen-to-world coordinate conversion is handled if window scaling is applied.",
+    "Check that enemy pathing logic handles the final waypoint transition to Core damage correctly.",
+    "Confirm tower range checks use squared distance for performance if many entities exist."
+  ]
+}

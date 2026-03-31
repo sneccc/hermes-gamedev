@@ -1,0 +1,41 @@
+{
+  "tower_stats": {
+    "pulse": {
+      "cost": 50,
+      "range": 150,
+      "damage": 5,
+      "cooldown": 0.5,
+      "color": "cyan"
+    },
+    "beam": {
+      "cost": 150,
+      "range": 300,
+      "damage": 20,
+      "cooldown": 1.5,
+      "color": "purple"
+    }
+  },
+  "enemy_stats": {
+    "swarmer": {
+      "hp": 10,
+      "speed": 150,
+      "value": 5,
+      "color": "red"
+    },
+    "tank": {
+      "hp": 100,
+      "speed": 60,
+      "value": 25,
+      "color": "orange"
+    }
+  },
+  "wave_data": {
+    "initial_budget": 50,
+    "budget_multiplier": 1.2
+  },
+  "colors": {
+    "background": [20, 20, 25, 255],
+    "path_neon": [0, 255, 255, 100],
+    "core": [0, 255, 0, 255]
+  }
+}
