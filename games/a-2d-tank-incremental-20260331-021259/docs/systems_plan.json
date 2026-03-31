@@ -1,0 +1,63 @@
+{
+  "systems": {
+    "CombatSystem": {
+      "responsibilities": [
+        "Rotate tank towards nearest target",
+        "Handle automatic firing based on fire rate",
+        "Manage projectile lifespans and collisions"
+      ],
+      "dependencies": ["EntityManager", "ProjectileSystem"]
+    },
+    "EnemySystem": {
+      "responsibilities": [
+        "Spawn enemies at screen edges",
+        "Move enemies towards center",
+        "Track enemy health and death",
+        "Scale enemy stats with wave number"
+      ],
+      "dependencies": ["WaveSystem", "ScrapSystem"]
+    },
+    "UpgradeSystem": {
+      "responsibilities": [
+        "Store and modify tank stats",
+        "Validate purchases against scrap balance",
+        "Increase cost of upgrades per level"
+      ],
+      "dependencies": ["ScrapSystem"]
+    },
+    "WaveSystem": {
+      "responsibilities": [
+        "Track current wave number",
+        "Manage wave duration and intervals",
+        "Update difficulty scaling factors"
+      ],
+      "dependencies": []
+    },
+    "ScrapSystem": {
+      "responsibilities": [
+        "Manage player currency",
+        "Award scrap from enemy deaths",
+        "Provide interface for spending scrap"
+      ],
+      "dependencies": []
+    }
+  },
+  "data_structures": {
+    "TankState": {
+      "rotation": "float",
+      "fire_timer": "float",
+      "level_damage": "int",
+      "level_fire_rate": "int"
+    },
+    "Enemy": {
+      "position": "Vector2",
+      "health": "float",
+      "type": "string",
+      "value": "int"
+    }
+  },
+  "scaling_logic": {
+    "enemy_health": "base_health * (1.1 ^ wave)",
+    "upgrade_cost": "base_cost * (1.5 ^ level)"
+  }
+}

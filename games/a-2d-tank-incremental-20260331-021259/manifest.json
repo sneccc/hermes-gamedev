@@ -3,5 +3,8 @@
   "description": "a 2d tank incremental game",
   "created": "2026-03-31T02:12:59+01:00",
   "status": "in-progress",
-  "files": []
+  "files": [
+    "docs/gdd.md",
+    "docs/systems_plan.json"
+  ]
 }
