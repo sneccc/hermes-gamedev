@@ -3,5 +3,8 @@
   "description": "a 3d plane simulator",
   "created": "2026-03-31T10:10:19+01:00",
   "status": "in-progress",
-  "files": []
+  "files": [
+    "docs/gdd.md",
+    "docs/systems_plan.json"
+  ]
 }

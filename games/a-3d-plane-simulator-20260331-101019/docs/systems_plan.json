@@ -1,0 +1,44 @@
+{
+  "systems": [
+    {
+      "name": "GameLoop",
+      "description": "Main entry point, manages timing (rl.get_frame_time()), clears screen, and coordinates system updates and draw calls.",
+      "file": "main.py"
+    },
+    {
+      "name": "InputSystem",
+      "description": "Reads keyboard inputs for pitch, roll, yaw, and throttle, passing them to the Player system.",
+      "file": "main.py"
+    },
+    {
+      "name": "PlayerPlane",
+      "description": "Manages 3D transform (position, rotation), velocity, and drawing of the aircraft geometry.",
+      "file": "entities.py"
+    },
+    {
+      "name": "RingManager",
+      "description": "Spawns new rings in the distance relative to the player's trajectory and despawns missed/passed rings.",
+      "file": "systems.py"
+    },
+    {
+      "name": "CollisionSystem",
+      "description": "Checks for intersections between the player's bounding volume and the active rings, as well as the ground (y=0 plane).",
+      "file": "systems.py"
+    },
+    {
+      "name": "GameState",
+      "description": "Tracks score, remaining time, win/loss conditions, and current game mode (playing, game_over, win).",
+      "file": "systems.py"
+    },
+    {
+      "name": "HUDSystem",
+      "description": "Draws 2D overlay text showing score, timer, throttle/speed, altitude, and end-game messages.",
+      "file": "ui.py"
+    },
+    {
+      "name": "MathUtils",
+      "description": "Helper functions for 3D vector operations and rotations (pitch/yaw/roll application to forward/up vectors) to handle flight physics without gimbal lock if possible.",
+      "file": "utils.py"
+    }
+  ]
+}
