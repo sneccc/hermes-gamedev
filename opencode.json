@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "openrouter": {}
+  },
+  "model": "openrouter/google/gemini-3-flash-preview",
+  "small_model": "openrouter/google/gemini-3-flash-preview",
+  "disabled_providers": ["openai", "anthropic", "gemini", "groq"],
+  "instructions": ["CLAUDE.md"]
+}
