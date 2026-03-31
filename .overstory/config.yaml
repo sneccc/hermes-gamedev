@@ -6,23 +6,20 @@ project:
   root: /mnt/c/Users/Daniel/CodingProjects/hermes/gamedev_project
   canonicalBranch: main
   qualityGates:
-    - name: Tests
-      command: bun test
-      description: all tests must pass
-    - name: Lint
-      command: bun run lint
-      description: zero errors
-    - name: Typecheck
-      command: bun run typecheck
-      description: no TypeScript errors
+    - name: Syntax
+      command: python3 -m py_compile src/main.py
+      description: all Python files must parse without syntax errors
+    - name: PyrayAPI
+      command: python3 -c "import ast, pyray, sys; tree=ast.parse(open(sys.argv[1]).read()); errs=[f'line {n.lineno} pyray.{n.attr} not found' for n in ast.walk(tree) if isinstance(n,ast.Attribute) and isinstance(n.value,ast.Name) and n.value.id in ('rl','pyray') and n.attr not in dir(pyray)]; print(chr(10).join(errs) or 'OK'); sys.exit(1 if errs else 0)" src/main.py
+      description: all pyray API calls must reference real pyray attributes
 agents:
   manifestPath: .overstory/agent-manifest.json
   baseDir: .overstory/agent-defs
-  maxConcurrent: 25
-  staggerDelayMs: 2000
+  maxConcurrent: 5
+  staggerDelayMs: 3000
   maxDepth: 2
   maxSessionsPerRun: 0
-  maxAgentsPerLead: 5
+  maxAgentsPerLead: 3
 worktrees:
   baseDir: .overstory/worktrees
 taskTracker:
@@ -55,6 +52,9 @@ coordinator:
     taskTrackerEmpty: false
     onShutdownSignal: false
 models:
+runtime:
+  default: claude
+  shellInitDelayMs: 2000
 logging:
   verbose: false
   redactSecrets: true
