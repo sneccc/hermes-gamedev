@@ -1,3 +1,5 @@
+import pyray as rl
+
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 GAME_TITLE = b"Vector Wings"
@@ -5,12 +7,12 @@ GAME_TITLE = b"Vector Wings"
 FPS = 60
 
 # Colors
-COLOR_BG = (10, 10, 30, 255)
-COLOR_TEXT = (255, 255, 255, 255)
-COLOR_PLANE = (200, 200, 200, 255)
-COLOR_RING = (0, 255, 0, 255)
-COLOR_GROUND = (10, 50, 10, 255)
-COLOR_WARNING = (255, 50, 50, 255)
+COLOR_BG = rl.Color(10, 10, 30, 255)
+COLOR_TEXT = rl.Color(255, 255, 255, 255)
+COLOR_PLANE = rl.Color(200, 200, 200, 255)
+COLOR_RING = rl.Color(0, 255, 0, 255)
+COLOR_GROUND = rl.Color(10, 50, 10, 255)
+COLOR_WARNING = rl.Color(255, 50, 50, 255)
 
 # Game Tuning
 TIME_START = 30.0
