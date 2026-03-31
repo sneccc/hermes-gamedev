@@ -35,7 +35,7 @@ merge:
 providers:
   openrouter:
     type: gateway
-    baseUrl: https://openrouter.ai/api/v1
+    baseUrl: https://openrouter.ai/api
     authTokenEnv: OPENROUTER_API_KEY
 watchdog:
   tier0Enabled: true
@@ -63,5 +63,5 @@ logging:
   verbose: false
   redactSecrets: true
 runtime:
-  default: opencode
+  default: claude
   shellInitDelayMs: 2000
